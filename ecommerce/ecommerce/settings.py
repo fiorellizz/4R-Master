@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fidk&q&n9z1ck%qk_&-^9vlf9p!wj_3!y=tm3&1k_uam4a#z80
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['4rmaster.com',]
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -138,4 +138,3 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
     constants.SUCCESS: 'alert-success',
     constants.INFO: 'alert-info',
-}
