@@ -1,0 +1,237 @@
+{% extends "bases/baseloja.html" %}
+{% load static %}
+
+<!--{% static 'loja/css/styles.css' %}-->
+
+{% block 'titulo' %}
+<title>4R | Loja</title>
+{% endblock 'titulo' %}
+
+{% block 'head' %}
+{% endblock 'head' %}
+
+{% block 'conteudo' %}
+
+{% if messages %}
+<br>
+{% for message in messages %}
+<div class="alert {{ message.tags }}">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+<body>
+    <header>
+        <nav id="navbar">
+            <a href="{% url 'homepage' %}"><img id="nav-logo" src="{% static 'loja/img/Logo.png' %}" width="64"
+                    alt="Imagem da logo"></a>
+
+            <ul id="nav_list">
+                <li class="nav-item active">
+                    <a href="#home">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#menu">Produtos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#testimonials">Avaliações</a>
+                </li>
+            </ul>
+
+
+            <div id="user-moedas">
+                <b>Saldo: 4R$ {{moedas|floatformat:2}}</b>
+            </div>
+
+
+            <div id="user-info">
+                <a class="btn-default" href="{% url 'sair' %}">
+                    Sair
+                </a>
+
+            </div>
+
+            <button id="mobile_btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
+        </nav>
+
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item">
+                    <a href="#home">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#menu">Produtos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#testimonials">Avaliações</a>
+                </li>
+            </ul>
+
+            <button class="btn-default">
+                Retire aqui
+            </button>
+        </div>
+    </header>
+
+    <main id="content">
+        <section id="home">
+            <div class="shape"></div>
+            <div id="cta">
+                <h1 class="title">
+                    O sucesso depende de
+                    <span>VOCÊ</span>
+                </h1>
+
+                <p class="description">
+                    Onde seus sonhos se tornam cada vez mais reais
+                </p>
+
+                <div id="cta_buttons">
+                    <a href="{% url 'produtos' %}" class="btn-default">
+                        Ver produtos
+                    </a>
+                </div>
+
+            </div>
+
+            <div id="banner">
+                <img src="{% static 'loja/img/foguete_4R.png' %}" alt="">
+            </div>
+        </section>
+
+        <section id="menu">
+            <h2 class="section-title">Produtos</h2>
+            <h3 class="section-subtitle">Os queridinhos da galera</h3>
+
+            <div id="dishes">
+                {% for produto in produtos %}
+                <div class="dish">
+                    <div class="dish-heart">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <img src="{{ produto.imagem.url }}" class="dish-image" alt="{{ produto.nome }}">
+
+                    <h3 class="dish-title">
+                        {{produto.nome}}
+                    </h3>
+
+                    <span class="dish-description">
+                        {{produto.descricao}}
+                    </span>
+
+                    <div class="dish-quantity">
+                        Quantidade disponível: <span>{{produto.qtd_disponivel}}</span>
+                    </div>
+
+                    <div class="dish-price">
+                        Saldo: 4R$ {{moedas|floatformat:2}}
+                    </div>
+
+                    <div class="dish-price">
+                        <h4>4R$ {{ produto.preco }}</h4>
+                        <form action="{% url 'confirmar_compra' produto.id %}" method="GET">
+                            <button class="btn-default" type="submit">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+            <div id="cta_buttons">
+                <a href="{% url 'produtos' %}" class="btn-default-products">
+                    Ver todos os produtos
+                </a>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <img src="{% static 'loja/img/foguete_4R.png' %}" id="testimonial_chef" alt="">
+
+            <div id="testimonials_content">
+                <h2 class="section-title">
+                    Depoimentos
+                </h2>
+                <h3 class="section-subtitle">
+                    O que os vendedores falam sobre nós
+                </h3>
+
+                <div id="feedbacks">
+                    <div class="feedback">
+                        <img src="{% static 'loja/img/Catharina.png' %}" class="feedback-avatar" alt="">
+
+                        <div class="feedback-content">
+                            <p>
+                                Catharina Goulart
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                            </p>
+                            <p>
+                                "Nossa, que maravilha essa campanha da 4R.
+                                <br>
+                                Vou conseguir resgatar um fogão 4 bocas para minha nova casa!"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="feedback">
+                        <img src="{% static 'loja/img/Davi.jpg' %}" class="feedback-avatar" alt="">
+
+                        <div class="feedback-content">
+                            <p>
+                                Davi Lima
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                            </p>
+                            <p>
+                                "Com essa campanha da 4R vou conseguir renovar meus eletrônicos e até conseguir fazer
+                                aquela sonhada viagem!!"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <img src="{% static 'loja/img/wave.svg' %}" alt="">
+
+        <div id="footer_items">
+            <span id="copyright">
+                &copy 2024 Guilherme Fiorelli Braz Rodrigues
+            </span>
+
+            <div class="social-media-buttons">
+                <a href="">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <a href="">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+{% endblock %}

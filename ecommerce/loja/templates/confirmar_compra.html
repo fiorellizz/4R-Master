@@ -1,0 +1,108 @@
+{% extends "bases/baseloja.html" %}
+{% load static %}
+
+<!--{% static 'loja/css/styles.css' %}-->
+
+{% block 'titulo' %}
+<title>4R | Confirmar Compra</title>
+{% endblock 'titulo' %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'loja/css/confirmar_compra.css' %}">
+{% endblock 'head' %}
+
+{% block 'conteudo' %}
+
+<body>
+    <header>
+        <nav id="navbar">
+            <a href="{% url 'homepage' %}"><img id="nav-logo" src="{% static 'loja/img/Logo.png' %}" width="64"
+                    alt="Imagem da logo"></a>
+
+            <div id="user-moedas">
+                <b>4R$ {{moedas|floatformat:2}}</b>
+            </div>
+
+            <div id="user-info">
+                <a class="btn-default" href="{% url 'sair' %}">Sair</a>
+            </div>
+
+            <button id="mobile_btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item">
+                    <a href="#menu">Categorias</a>
+                </li>
+            </ul>
+
+            <button class="btn-default">Retire aqui</button>
+        </div>
+    </header>
+
+    <main id="content">
+        <div class="confirmar-compra">
+            <h2>Confirmar Compra</h2>
+            <div class="produto-info">
+                <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+                <div class="produto-descricao">
+                    <h3>{{ produto.nome }}</h3>
+                    <p>Preço: 4R$ {{ produto.preco }}</p>
+                    <p>Descrição: {{ produto.descricao }}</p>
+                    <p>Disponível: {{ produto.qtd_disponivel }}</p>
+                    <p>Saldo disponível: 4R$ {{ moedas|floatformat:2 }}</p>
+
+                    <div class="botoes-compra">
+                        <form action="{% url 'homepage' %}" method="GET">
+                            {% csrf_token %}
+                            <button class="btn-voltar" type="submit">Voltar</button>
+                        </form>
+
+                        <form action="{% url 'verificar_compra' produto.id %}" method="GET">
+                            {% csrf_token %}
+                            <button class="btn-finalizar" type="submit">Comprar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if messages %}
+            <br>
+            {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </main>
+
+
+    <!--
+    <footer>
+        <img src="{% static 'loja/img/wave.svg' %}" alt="">
+
+        <div id="footer_items">
+            <span id="copyright">
+                &copy 2024 Guilherme Fiorelli Braz Rodrigues
+            </span>
+
+            <div class="social-media-buttons">
+                <a href="">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <a href="">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    -->
+</body>
+
+{% endblock %}

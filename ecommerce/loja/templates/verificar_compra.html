@@ -1,0 +1,81 @@
+{% extends "bases/baseloja.html" %}
+{% load static %}
+
+<!--{% static 'loja/css/styles.css' %}-->
+
+{% block 'titulo' %}
+<title>4R | Verificar Compra</title>
+{% endblock 'titulo' %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'loja/css/confirmar_compra.css' %}">
+{% endblock 'head' %}
+
+{% block 'conteudo' %}
+
+<body>
+    <header>
+        <nav id="navbar">
+            <a href="{% url 'homepage' %}"><img id="nav-logo" src="{% static 'loja/img/Logo.png' %}" width="64"
+                    alt="Imagem da logo"></a>
+
+            <div id="user-moedas">
+                <b>4R$ {{moedas|floatformat:2}}</b>
+            </div>
+
+            <div id="user-info">
+                <a class="btn-default" href="{% url 'sair' %}">Sair</a>
+            </div>
+
+            <button id="mobile_btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item">
+                    <a href="#menu">Categorias</a>
+                </li>
+            </ul>
+
+            <button class="btn-default">Retire aqui</button>
+        </div>
+    </header>
+
+    <main id="content">
+        <div class="confirmar-compra">
+            <h3>Você tem certeza que deseja concluir a compra?</h3>
+            <div class="produto-info">
+                <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+                <div class="produto-descricao">
+                    <h3>{{ produto.nome }}</h3>
+                    <p>Preço: 4R$ {{ produto.preco }}</p>
+                    <p>Descrição: {{ produto.descricao }}</p>
+                    <p>Disponível: {{ produto.qtd_disponivel }}</p>
+                    <p>Saldo disponível: 4R$ {{ moedas|floatformat:2 }}</p>
+
+                    <div class="botoes-compra">
+                        <form action="{% url 'homepage' %}" method="GET">
+                            {% csrf_token %}
+                            <button class="btn-voltar" type="submit">Não</button>
+                        </form>
+
+                        <form action="{% url 'finalizar_compra' produto.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn-finalizar" type="submit">Sim</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if messages %}
+            <br>
+            {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </main>
+</body>
+
+{% endblock %}

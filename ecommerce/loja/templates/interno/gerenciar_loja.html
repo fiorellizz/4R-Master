@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4R | Administração</title>
+    <link rel="stylesheet" href="{% static 'adm/css/styles.css' %}">
+</head>
+<body>
+    <main>
+        <section id="exportar-dados">
+            <h2>Exportar Dados</h2>
+            <div class="export-links">
+                <a href="{% url 'exportar_relatorio' 'compras' %}" class="export-btn">Exportar Compras</a>
+                <a href="{% url 'exportar_relatorio' 'usuarios' %}" class="export-btn">Exportar Usuários</a>
+                <a href="{% url 'exportar_relatorio' 'produtos' %}" class="export-btn">Exportar Produtos</a>
+                <a href="{% url 'homepage' %}" class="export-btn">Voltar</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
