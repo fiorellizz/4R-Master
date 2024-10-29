@@ -56,7 +56,7 @@
                     <p>Saldo disponível: 4R$ {{ moedas|floatformat:2 }}</p>
 
                     <div class="botoes-compra">
-                        <form action="{% url 'homepage' %}" method="GET">
+                        <form action="{% url 'produtos' %}" method="GET">
                             {% csrf_token %}
                             <button class="btn-voltar" type="submit">Voltar</button>
                         </form>
@@ -76,33 +76,6 @@
             {% endif %}
         </div>
     </main>
-
-
-    <!--
-    <footer>
-        <img src="{% static 'loja/img/wave.svg' %}" alt="">
-
-        <div id="footer_items">
-            <span id="copyright">
-                &copy 2024 Guilherme Fiorelli Braz Rodrigues
-            </span>
-
-            <div class="social-media-buttons">
-                <a href="">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
-
-                <a href="">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-
-                <a href="">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-    -->
 </body>
 
 {% endblock %}

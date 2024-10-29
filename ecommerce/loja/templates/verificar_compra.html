@@ -56,7 +56,7 @@
                     <p>Saldo disponível: 4R$ {{ moedas|floatformat:2 }}</p>
 
                     <div class="botoes-compra">
-                        <form action="{% url 'homepage' %}" method="GET">
+                        <form action="{% url 'produtos' %}" method="GET">
                             {% csrf_token %}
                             <button class="btn-voltar" type="submit">Não</button>
                         </form>
