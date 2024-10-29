@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fidk&q&n9z1ck%qk_&-^9vlf9p!wj_3!y=tm3&1k_uam4a#z80'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['4Rmaster.com', 'www.4Rmaster.com']
 
 
 # Application definition
