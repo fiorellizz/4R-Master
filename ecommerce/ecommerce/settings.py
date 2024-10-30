@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fidk&q&n9z1ck%qk_&-^9vlf9p!wj_3!y=tm3&1k_uam4a#z80
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['92.113.34.52', '4rmaster.com', 'localhost']
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
