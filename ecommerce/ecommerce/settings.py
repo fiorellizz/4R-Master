@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fidk&q&n9z1ck%qk_&-^9vlf9p!wj_3!y=tm3&1k_uam4a#z80'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['4rmaster.com', 'www.4rmaster.com', '92.113.34.52', 'localhost']
 
 # Application definition
 
@@ -117,11 +117,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates/static'),)
+# Diretório dos arquivos estáticos coletados (pasta final que o Nginx usará)
+STATIC_ROOT = '/var/www/4R-Master/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# URL para acessar os arquivos estáticos
+STATIC_URL = '/static/'
+
+# Diretório dos arquivos estáticos no ambiente de desenvolvimento
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static')]
+
+# Diretório dos arquivos de mídia (pasta final que o Nginx usará)
+MEDIA_ROOT = '/var/www/4R-Master/media/'
+
+# URL para acessar os arquivos de mídia
 MEDIA_URL = '/media/'
 
 # Default primary key field type

@@ -42,12 +42,16 @@
                 <b>Saldo: 4R$ {{moedas|floatformat:2}}</b>
             </div>
 
+            <div id="user-info">
+                <a class="btn-default" href="{% url 'trocar' %}">
+                    Trocar Senha
+                </a>
+            </div>
 
             <div id="user-info">
                 <a class="btn-default" href="{% url 'sair' %}">
                     Sair
                 </a>
-
             </div>
 
             <button id="mobile_btn">

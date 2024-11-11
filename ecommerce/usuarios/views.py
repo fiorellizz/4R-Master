@@ -58,8 +58,35 @@ def logar(request):
             messages.add_message(request, constants.ERROR, 'Usuario ou senha inválidos')
             return redirect('/usuarios/logar')
 
-@login_required
+@login_required(login_url='/usuarios/logar')
 def sair(request):
     logout(request)
     return redirect('/usuarios/logar')
 
+
+@login_required(login_url='/usuarios/logar')
+def trocar(request):
+    if request.method == "GET":
+        return render(request, 'trocarsenha.html')
+    
+    elif request.method == "POST":
+        senha = request.POST.get('senha')
+        confirmar_senha = request.POST.get('confirmar_senha')
+        
+        if senha != confirmar_senha:
+            messages.add_message(request, constants.ERROR, 'As senhas não coincidem')
+            return redirect('/usuarios/trocar')
+        
+        if len(senha.strip()) < 6:
+            messages.add_message(request, constants.ERROR, 'Sua senha deve ter 7 ou mais caracteres')
+            return redirect('/usuarios/trocar')
+        
+        try:
+            user = request.user
+            user.set_password(senha)
+            user.save()
+            login(request, user)
+            return redirect('/loja')
+        except:
+            messages.add_message(request, constants.ERROR, 'Erro ao alterar a senha. Tente novamente ou contate um administrador.')
+            return redirect('/usuarios/trocar')
